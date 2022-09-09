@@ -1,74 +1,49 @@
-import {useNavigate} from "react-router-dom";
-import { useEffect, useState } from 'react';
-// import { List, Alert } from 'antd';
-import Appointment from './Appointment.js';
+import { useNavigate } from "react-router-dom";
+import { Card, List } from "antd";
+import { useEffect, useState } from "react";
 
-function Confirmation(){
-    let navigate = useNavigate();
-return(
-    <div>
-        <button onClick= {() => {
-            navigate("Homepage")
-            }}
-            >
-                {" "} 
-                Change to Home Page</button>
-    </div>
-);
-}
+export default function Confirmation() {
+  const [appointments, setAppointments] = useState([]);
 
+  let navigate = useNavigate();
 
-
-export default function appointment({ appointmentlist, setAppointment, token }) {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState();
-  // call the api and use setTasklist to fill in state...
   useEffect(() => {
-    fetch('https://three-do-api-mtm.web.app/tasks', { 
-    // fetch('http://localhost:5555/tasks', {
-      headers: {
-        'Authorization': token,
-      }
-    })
-      .then(results => results.json())
-      .then(appointment => {
-        setAppointment(Appointment);
-        setLoading(false);
-        setError('');
+    fetch("https://musichall-api.web.app/appointments")
+      .then((results) => results.json())
+      .then((data) => {
+        setAppointments(data);
       })
-      .catch(err => {
-        setError(err.message);
-        setLoading(false);
-      })
-  }, [token, setAppointment, setLoading, setError]);
+      .catch(alert);
+  }, [setAppointments]);
+
   return (
     <>
-      {(error && token) && <Alert
-        message="Error"
-        description={error}
-        type="error"
-        showIcon
-      />}
-      <div className='appointment'>
-        <List
-          dataSource={'appointmentList'}
-          loading={loading}
-          renderItem={(item) => (
-            <Appointment
-              // key={item.id}
-              item={item}
-              // token={token}
-              setLoading={setLoading}
-              setAppointmentt={setAppointment}
-              setError={setError} />
-          )}
-        />
+      <div className="confirmation-page">
+        <div className="confirmation-list">
+          <List
+            grid={{
+              gutter: 16,
+              xs: 1,
+              sm: 2,
+              md: 4,
+              lg: 4,
+              xl: 6,
+              xxl: 3,
+            }}
+            dataSource={appointments}
+            renderItem={(item) => (
+              <List.Item>
+                <Card title={item.email}>
+                  <div>{item.firstName}</div>
+                  <div>{item.lastName}</div>
+                </Card>
+              </List.Item>
+            )}
+          />
+        </div>
       </div>
     </>
-  )
+  );
 }
 
-
 // const Confirmation = () => <h3>This is the Confirmation Page.</h3>
-
- 

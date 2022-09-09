@@ -1,9 +1,11 @@
 import {useNavigate} from "react-router-dom";
 
-function Timesetter(){
+function Timesetter({appointments,setAppointments}){
     let navigate = useNavigate();
 return(
     <div>
+        <h1>Timesetter</h1>
+        <h2>date;{navigate}</h2>
         <button onClick= {() => {
             navigate("Confirmation")
             }}
@@ -13,6 +15,7 @@ return(
     </div>
 );
 }
+
 
 
 
