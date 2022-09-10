@@ -7,11 +7,7 @@ import "react-calendar/dist/Calendar.css";
 function Appointment({ appointment, setAppointment }) {
   let navigate = useNavigate();
 
-  // function Confirmation( appointmentdate){
-
-  //         setAppointment({...appointment, appointmentdate:appointmentdate})
-  // }
-
+  
   return (
     <div>
       <button
