@@ -1,22 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Homepage.css";
-
-// function Homepage(){
-//     let navigate = useNavigate();
-// return(
-//     <div>
-//         <button onClick= {() => {
-//             navigate("Appointment")
-//             }}
-//             >
-//                 {" "}
-//                 Change to Appointment Page</button>
-//     </div>
-// );
-// }
-
-// const Homepage = () => <h3>This is the Homepage</h3>
+ 
 
 export default function Homepage({ appointment, setAppointment }) {
   let navigate = useNavigate();
@@ -48,6 +33,8 @@ export default function Homepage({ appointment, setAppointment }) {
       );
       const data = await results.json();
       console.log(data);
+
+  
 
 
       setAppointment(data);
